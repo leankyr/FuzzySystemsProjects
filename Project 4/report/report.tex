@@ -1,0 +1,636 @@
+
+\documentclass[11pt,a4paper,titlepage, oneside]{article}
+
+%
+\usepackage[left=1in,right=1in,top=1in,bottom=1.5in]{geometry}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+%\usepackage{unicode-math}
+\usepackage[lite]{mtpro2}
+\usepackage[no-math]{fontspec}
+\setromanfont{Times}
+\setsansfont{Source Sans Pro Semibold}
+%\setmathfont{Libertinus Math}
+
+%\usepackage{polyglossia}
+\usepackage{xgreek}
+
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{graphicx}
+\usepackage{xltxtra}
+\usepackage{makeidx}
+\usepackage{enumerate}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{grffile}
+\usepackage{adjustbox}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{hhline} 
+\usepackage{diagbox}
+\usepackage{xcolor}
+\usepackage{contour}
+\contourlength{1.2pt}
+
+% Tikz
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usetikzlibrary{shapes,arrows,calc}
+\usepackage{blox}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{patterns, shadings, tikzmark}
+
+\usepackage[compat=1.0.0]{tikz-feynman}
+
+% Margins
+\topmargin=-0.45in
+%\evensidemargin=0in
+%\oddsidemargin=0in
+%\textwidth=6in
+%\textheight=9in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{} % Top left header
+\chead{\hmwkClass\ - \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Σελίδα\ \thepage\ από\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{1}
+
+%----------------------------------------------------------------------------------------
+%	LOCALIZATION
+%----------------------------------------------------------------------------------------
+
+\renewcommand\figurename{Σχήμα}
+\renewcommand\contentsname{Περιεχόμενα}
+\renewcommand\indexname{Ευρετήριο}
+\renewcommand\tablename{Πίνακας}
+\renewcommand\appendixname{Παράρτημα}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Εργασία 4 - Σειρά 11} % Assignment title
+\newcommand{\hmwkClass}{Ασαφή Συστήματα} % Course/class
+\newcommand{\hmwkAuthorName}{Δημανίδης Ιωάννης} % Your name
+\newcommand{\hmwkAuthorAEM}{8358} % Your ΑΕΜ
+
+%----------------------------------------------------------------------------------------
+%	MISC OPTIONS
+%----------------------------------------------------------------------------------------
+\graphicspath{{./figures/}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\makeatletter
+\newcommand{\xRightarrow}[2][]{\ext@arrow 0359\Rightarrowfill@{#1}{#2}}
+\makeatother
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+\newlength\figureheight
+\newlength\figurewidth
+
+\allowdisplaybreaks[1]
+
+\setlength\figureheight{3.27cm}
+\setlength\figurewidth{0.42\textwidth}	
+
+\titleformat*{\section}{\Large\sffamily}
+\titleformat*{\subsection}{\sffamily}
+\titlespacing*{\section}{0pt}{1.2em}{0.3em}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.2em}
+
+
+\tikzset{
+	block/.style = {draw, fill=white, rectangle, minimum height=2.5em, minimum width=2em, node distance=1.5cm},%
+	tmp/.style  = {coordinate},%
+	sum/.style= {draw, fill=white, circle, node distance=1.25cm},%
+	input/.style = {coordinate},%
+	output/.style= {coordinate},%
+	pinstyle/.style = {pin edge={to-,thin,black}	}%
+}
+
+\tikzset{%
+  saturation block/.style={%
+    draw, minimum height=2.5em, minimum width=2.5em,
+    node distance=1.5cm,
+    path picture={
+      % Get the width and height of the path picture node
+      \pgfpointdiff{\pgfpointanchor{path picture bounding box}{north east}}%
+        {\pgfpointanchor{path picture bounding box}{south west}}
+      \pgfgetlastxy\x\y
+      % Scale the x and y vectors so that the range
+      % -1 to 1 is slightly shorter than the size of the node
+      \tikzset{x=\x*.4, y=\y*.4}
+      %
+      % Draw annotation
+      \draw (-1,0) -- (1,0) (0,-1) -- (0,1); 
+      \draw (-1,-.7) -- (-.7,-.7) -- (.7,.7) -- (1,.7);
+    }
+  }
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+	\vspace{5cm}
+	\Huge{\sffamily{\hmwkClass}}\\
+	\vspace{0.1em}
+	\LARGE{\hmwkTitle}\\
+	\vspace{7cm}
+}
+
+\author{\sffamily{\hmwkAuthorName\ - \hmwkAuthorAEM}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle
+	
+	%----------------------------------------------------------------------------------------
+	%	TABLE OF CONTENTS
+	%----------------------------------------------------------------------------------------
+	
+	%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+	
+	%\newpage
+	%\tableofcontents
+	%\clearpage
+	%\newpage
+	
+	
+	%----------------------------------------------------------------------------------------
+	%	Document
+	%----------------------------------------------------------------------------------------
+	\section{Μοντέλα Singleton}
+		\subsection{Εκπαίδευση με back-propagation}
+			\begin{wraptable}{r}{0.5\textwidth}
+				\centering
+				\begin{tabular}{c | c c c}
+					 & \bfseries{RMSE} & \bfseries{NMSE} & \bfseries{NDEI} \\ \hline{}
+					 $D_{trn}$ & 0.10138 & 0.16465 & 0.40577 \\ \hline
+					 $D_{val}$ & 0.09679 & 0.15820 & 0.39774 \\ \hline
+					 $D_{chk}$ & 0.09909 & 0.14911 & 0.38615 \\ 
+				\end{tabular}
+				\caption{Δείκτες σφαλμάτων για το μοντέλο singleton TSK (BP)}
+				\label{tab:singleton_bp_error_metrics}
+			\end{wraptable}
+			Δημιουργούμε τα σύνολα $D_{trn}, D_{val}, D_{chk}$ τα οποία είναι της μορφής 
+			$$ \begin{bmatrix} x(t-12) & x(t-6) & x(t) & x(t+6) \end{bmatrix} $$
+			παίρνοντας τις τιμές της χρονοσειράς από το δοσμένο dataset. Αρχικοποιούμε το μηδενικής τάξης TSK με τη χρήση του διαμερισμού πλέγματος, και δίνουμε τυχαίες τιμές στα βάρη του τμήματος συμπεράσματος.\\
+						
+			\begin{wrapfigure}{r}{0.5\textwidth}
+				\vspace{-15pt}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\includegraphics{figure-3}
+				\caption{Καμπύλες εκμάθησης για το μοντέλο singleton TSK (BP)}
+				\label{fig:singleton_bp_learning_curves}
+			\end{wrapfigure}
+			
+			 Έπειτα, εκπαιδεύουμε το μοντέλο μας με τη χρήση του αλγορίθμου back-propagation για 1000 epochs χρησιμοποιώντας το $D_{trn}$ και το $D_{val}$ και θεωρούμε το βέλτιστο μοντέλο αυτό το οποίο προσφέρει το μικρότερο RMSE στα στοιχεία του συνόλου αξιολόγησης. Στο σχήμα \ref{fig:singleton_bp_predictions} παρουσιάζονται οι προβλέψεις του μοντέλου σε σύγκριση με τις πραγματικές τιμές, καθώς και το μεταξύ τους σφάλμα. Οι κόκκινες γραμμές διαχωρίζουν τα 3 σύνολα $D_{trn}, D_{val}, D_{chk}$ μεταξύ τους. Παρατηρούμε λοιπόν πως ακολουθούμε αρκετά καλά την χρονοσειρά με το σφάλμα να κυμαίνεται σε σχετικά αποδεκτά επίπεδα, όπως φαίνεται και από τις μετρικές που παρουσιάζονται στον πίνακα \ref{tab:singleton_bp_error_metrics}. Επίσης, παρατηρώντας τους δείκτες σφάλματος, βλέπει κανείς ότι ο κάθε δείκτης είναι σχεδόν ίδιος και για τα 3 σύνολα, πράγμα που σημαίνει ότι δεν έχουμε υπερεκπαίδευση. Αυτό επαληθεύεται και από τις καμπύλες εκμάθησης που παρουσιάζονται στο σχήμα \ref{fig:singleton_bp_learning_curves}, όπου σχεδόν ταυτίζονται.\\
+						
+			\begin{figure}[h]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-1}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-2}
+				\end{subfigure}
+				\caption{Προβλέψεις μοντέλου singleton TSK (BP) σε σύγκριση με τις πραγματικές τιμές της χρονοσειράς και το μεταξύ τους σφάλμα}
+				\label{fig:singleton_bp_predictions}
+			\end{figure}
+			
+			\begin{wraptable}{r}{0.5\textwidth}
+				\centering
+				\begin{tabular}[b]{r c c c||c|c}
+					 \bfseries{Rule} & $x_1$ & $x_2$ & $x_3$ & $y$ & Value\\ \hhline{====||=|=}
+						$R_{1}$ & $A_1^1$ & $A_2^1$ & $A_3^1$ & $w_1$ & 0.7360 \\%\hhline{----||-}
+						$R_{2}$ & $A_1^1$ & $A_2^1$ & $A_3^2$ & $w_2$ & 1.4084 \\%\hhline{----||-}
+						$R_{3}$ & $A_1^1$ & $A_2^2$ & $A_3^1$ & $w_3$ & -0.0741\\%\hhline{----||-}
+						$R_{4}$ & $A_1^1$ & $A_2^2$ & $A_3^2$ & $w_4$ & 1.8594 \\%\hhline{----||-}
+						$R_{5}$ & $A_1^2$ & $A_2^1$ & $A_3^1$ & $w_5$ & 0.2140 \\%\hhline{----||-}
+						$R_{6}$ & $A_1^2$ & $A_2^1$ & $A_3^2$ & $w_6$ & 0.3194 \\%\hhline{----||-}
+						$R_{7}$ & $A_1^2$ & $A_2^2$ & $A_3^1$ & $w_7$ & -0.1181\\%\hhline{----||-}
+						$R_{8}$ & $A_1^2$ & $A_2^2$ & $A_3^2$ & $w_8$ & 1.1641 \\%\hhline{----||-}
+				\end{tabular}
+				\caption{Ασαφής βάση κανόνων για το μοντέλο singleton TSK (BP)}
+				\label{tab:singleton_bp_rulebase}
+			\end{wraptable}
+
+			Στο σχήμα \ref{fig:singleton_bp_input_sets} παρουσιάζονται τα τελικά σύνολα εισόδου που προέκυψαν από την εκπαίδευση του μοντέλου μας με τη χρήση back-propagation. Να σημειωθεί ότι ορίζουμε ως την είσοδο $x_1$ το $x(t-12)$, ως την είσοδο $x_2$ το $x(t-6)$, ως την είσοδο $x_3$ το $x(t)$ και ως την έξοδο $y = \hat{x}(t+6)$. Επιπλέον, στον πίνακα \ref{tab:singleton_bp_rulebase} παρουσιάζεται η βάση κανόνων που προέκυψε για το μοντέλο μας. \\ \\
+			
+			\begin{figure}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.25\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-4}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-5}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-6}
+				\end{subfigure}
+				\caption{Σύνολα εισόδου για το μοντέλο singleton TSK (BP)}
+				\label{fig:singleton_bp_input_sets}
+			\end{figure}
+				
+		\subsection{Εκπαίδευση με υβριδικό αλγόριθμο}
+			\begin{wraptable}{r}{0.5\textwidth}
+				\vspace{-7pt}
+				\centering
+				\begin{tabular}{c | c c c}
+					 & \bfseries{RMSE} & \bfseries{NMSE} & \bfseries{NDEI} \\ \hline{}
+					 $D_{trn}$ & 0.09423 & 0.14226 & 0.37717 \\ \hline
+					 $D_{val}$ & 0.08833 & 0.13177 & 0.36299 \\ \hline
+					 $D_{chk}$ & 0.09095 & 0.12562 & 0.35443 \\ 
+				\end{tabular}
+				\caption{Δείκτες σφαλμάτων για το μοντέλο singleton TSK (Hybrid)}
+				\label{tab:singleton_hybrid_error_metrics}
+			\end{wraptable}
+			Δημιουργούμε τα σύνολα $D_{trn}, D_{val}, D_{chk}$ τα οποία είναι της μορφής 
+			$$ \begin{bmatrix} x(t-12) & x(t-6) & x(t) & x(t+6) \end{bmatrix} $$
+			παίρνοντας τις τιμές της χρονοσειράς από το δοσμένο dataset. Αρχικοποιούμε το μηδενικής τάξης TSK με τη χρήση του διαμερισμού πλέγματος, και δίνουμε τυχαίες τιμές στα βάρη του τμήματος συμπεράσματος.\\
+						
+			\begin{wrapfigure}{r}{0.5\textwidth}
+				\vspace{-42pt}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\includegraphics{figure-9}
+				\caption{Καμπύλες εκμάθησης για το μοντέλο singleton TSK (Hybrid)}
+				\label{fig:singleton_hybrid_learning_curves}
+				\vspace{-15pt}
+			\end{wrapfigure}
+			
+			 Έπειτα, εκπαιδεύουμε το μοντέλο μας με τη χρήση υβριδικού αλγορίθμου για 1000 epochs χρησιμοποιώντας το $D_{trn}$ και το $D_{val}$ και θεωρούμε το βέλτιστο μοντέλο αυτό το οποίο προσφέρει το μικρότερο RMSE στα στοιχεία του συνόλου αξιολόγησης. Στο σχήμα \ref{fig:singleton_hybrid_predictions} παρουσιάζονται οι προβλέψεις του μοντέλου σε σύγκριση με τις πραγματικές τιμές, καθώς και το μεταξύ τους σφάλμα. Οι κόκκινες γραμμές διαχωρίζουν τα 3 σύνολα $D_{trn}, D_{val}, D_{chk}$ μεταξύ τους. Παρατηρούμε λοιπόν πως ακολουθούμε αρκετά καλά την χρονοσειρά με το σφάλμα να κυμαίνεται σε σχετικά αποδεκτά επίπεδα, όπως φαίνεται και από τις μετρικές που παρουσιάζονται στον πίνακα \ref{tab:singleton_hybrid_error_metrics}. Επίσης, παρατηρώντας τους δείκτες σφάλματος, βλέπει κανείς ότι ο κάθε δείκτης είναι σχεδόν ίδιος και για τα 3 σύνολα, πράγμα που σημαίνει ότι δεν έχουμε υπερεκπαίδευση. Αυτό επαληθεύεται και από τις καμπύλες εκμάθησης που παρουσιάζονται στο σχήμα \ref{fig:singleton_hybrid_learning_curves}, όπου βρίσκονται αρκετά κοντά, με το σφάλμα αξιολόγησης μικρότερο από το σφάλμα εκμάθησης, πράγμα το οποίο είναι απλά περιστασιακό και δεν σημαίνει κάτι παραπάνω. Επιπλέον παρατηρούμε ότι οι καμπύλες σφάλματος ξεκινάνε αμέσως από πολύ χαμηλότερο αρχικό σφάλμα, πράγμα το οποίο συμβαίνει διότι για να βρούμε τα βάρη των συμπερασμάτων επιλύουμε την κανονική εξίσωση, οπότε έχοντας βρει τα βέλτιστα συμπεράσματα εκτελούμε BP για να τοποθετήσουμε βέλτιστα τα σύνολα εισόδου. Ποιοτικά, τα τελικά μας αποτελέσματά είναι παρόμοια με προηγουμένως με τη μόνη διαφορά ότι οι δείκτες σφάλματος είναι ελαφρώς μικρότεροι από ότι ήταν πριν.\\
+						
+			\begin{figure}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-7}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-8}
+				\end{subfigure}
+				\caption{Προβλέψεις μοντέλου singleton TSK (Hybrid) σε σύγκριση με τις πραγματικές τιμές της χρονοσειράς και το μεταξύ τους σφάλμα}
+				\label{fig:singleton_hybrid_predictions}
+			\end{figure}
+			
+			\begin{wraptable}{r}{0.5\textwidth}
+				\vspace{-12pt}
+				\centering
+				\begin{tabular}[b]{r c c c||c|c}
+					\bfseries{Rule} & $x_1$ & $x_2$ & $x_3$ & $y$ & Value\\ \hhline{====||=|=}
+					$R_{1}$ & $A_1^1$ & $A_2^1$ & $A_3^1$ & $w_1$ & 2.5985 \\
+					$R_{2}$ & $A_1^1$ & $A_2^1$ & $A_3^2$ & $w_2$ & -2.4402 \\
+					$R_{3}$ & $A_1^1$ & $A_2^2$ & $A_3^1$ & $w_3$ & -0.4113 \\
+					$R_{4}$ & $A_1^1$ & $A_2^2$ & $A_3^2$ & $w_4$ & 2.6936 \\
+					$R_{5}$ & $A_1^2$ & $A_2^1$ & $A_3^1$ & $w_5$ & -14.1754 \\
+					$R_{6}$ & $A_1^2$ & $A_2^1$ & $A_3^2$ & $w_6$ & 32.2245 \\			
+					$R_{7}$ & $A_1^2$ & $A_2^2$ & $A_3^1$ & $w_7$ & -0.0628 \\
+					$R_{8}$ & $A_1^2$ & $A_2^2$ & $A_3^2$ & $w_8$ & 0.7743 \\
+				\end{tabular}
+				\caption{Ασαφής βάση κανόνων για το μοντέλο singleton TSK (Hybrid)}
+				\label{tab:singleton_hybrid_rulebase}
+			\end{wraptable}
+
+			Στο σχήμα \ref{fig:singleton_bp_input_sets} παρουσιάζονται τα τελικά σύνολα εισόδου που προέκυψαν από την εκπαίδευση του μοντέλου μας με τη χρήση υβριδικού αλγορίθμου. Να σημειωθεί ότι ορίζουμε ως την είσοδο $x_1$ το $x(t-12)$, ως την είσοδο $x_2$ το $x(t-6)$, ως την είσοδο $x_3$ το $x(t)$ και ως την έξοδο $y = \hat{x}(t+6)$. Επιπλέον, στον πίνακα \ref{tab:singleton_hybrid_rulebase} παρουσιάζεται η βάση κανόνων που προέκυψε για το μοντέλο μας. Παρατηρούμε ότι ενώ τα σύνολα εισόδου ποιοτικά είναι παρόμοια με τα προηγούμενα, τα βάρη συμπερασμάτων είναι εντελώς διαφορετικά.
+						
+			\clearpage
+
+						
+			\begin{figure}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.25\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-10}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-11}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-12}
+				\end{subfigure}
+				\caption{Σύνολα εισόδου για το μοντέλο singleton TSK (Hybrid)}
+				\label{fig:singleton_bp_input_sets}
+			\end{figure}
+		
+	\section{Μοντέλα TSK}
+		\subsection{Εκπαίδευση με back-propagation}
+			\begin{wraptable}{r}{0.5\textwidth}
+				\centering
+				\begin{tabular}{c | c c c}
+					 & \bfseries{RMSE} & \bfseries{NMSE} & \bfseries{NDEI} \\ \hline{}
+					 $D_{trn}$ & 0.10138 & 0.16465 & 0.40577 \\ \hline
+					 $D_{val}$ & 0.09679 & 0.15820 & 0.39774 \\ \hline
+					 $D_{chk}$ & 0.09909 & 0.14911 & 0.38615 \\ 
+				\end{tabular}
+				\caption{Δείκτες σφαλμάτων για το μοντέλο first-order TSK (BP)}
+				\label{tab:tsk_bp_error_metrics}
+			\end{wraptable}
+			Δημιουργούμε τα σύνολα $D_{trn}, D_{val}, D_{chk}$ τα οποία είναι της μορφής 
+			$$ \begin{bmatrix} x(t-12) & x(t-6) & x(t) & x(t+6) \end{bmatrix} $$
+			παίρνοντας τις τιμές της χρονοσειράς από το δοσμένο dataset. Αρχικοποιούμε το πρώτης τάξης TSK με τη χρήση του διαμερισμού πλέγματος, και δίνουμε τυχαίες τιμές στα βάρη του τμήματος συμπεράσματος.\\
+						
+			\begin{wrapfigure}{r}{0.5\textwidth}
+				\vspace{-15pt}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\includegraphics{figure-15}
+				\caption{Καμπύλες εκμάθησης για το μοντέλο first-order TSK (BP)}
+				\label{fig:tsk_bp_learning_curves}
+			\end{wrapfigure}
+			
+			 Έπειτα, εκπαιδεύουμε το μοντέλο μας με τη χρήση του αλγορίθμου back-propagation για 1000 epochs χρησιμοποιώντας το $D_{trn}$ και το $D_{val}$ και θεωρούμε το βέλτιστο μοντέλο αυτό το οποίο προσφέρει το μικρότερο RMSE στα στοιχεία του συνόλου αξιολόγησης. Στο σχήμα \ref{fig:tsk_bp_predictions} παρουσιάζονται οι προβλέψεις του μοντέλου σε σύγκριση με τις πραγματικές τιμές, καθώς και το μεταξύ τους σφάλμα. Οι κόκκινες γραμμές διαχωρίζουν τα 3 σύνολα $D_{trn}, D_{val}, D_{chk}$ μεταξύ τους. Παρατηρούμε λοιπόν πως ακολουθούμε αρκετά καλά την χρονοσειρά με το σφάλμα να κυμαίνεται σε σχετικά αποδεκτά επίπεδα, όπως φαίνεται και από τις μετρικές που παρουσιάζονται στον πίνακα \ref{tab:tsk_bp_error_metrics}. Επίσης, παρατηρώντας τους δείκτες σφάλματος, βλέπει κανείς ότι ο κάθε δείκτης είναι σχεδόν ίδιος και για τα 3 σύνολα, πράγμα που σημαίνει ότι δεν έχουμε υπερεκπαίδευση. Αυτό επαληθεύεται και από τις καμπύλες εκμάθησης που παρουσιάζονται στο σχήμα \ref{fig:tsk_bp_learning_curves}, όπου σχεδόν ταυτίζονται.\\
+						
+			\begin{figure}[h]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-13}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-14}
+				\end{subfigure}
+				\caption{Προβλέψεις μοντέλου first-order TSK (BP) σε σύγκριση με τις πραγματικές τιμές της χρονοσειράς και το μεταξύ τους σφάλμα}
+				\label{fig:tsk_bp_predictions}
+			\end{figure}
+			
+			\begin{table}[h]
+				\centering
+				\begin{tabular}[b]{r c c c||c|c|c|c|c}
+					 \bfseries{Rule} & $x_1$ & $x_2$ & $x_3$ & $y$ & $g_{i, 3}$ & $g_{i, 2}$ & $g_{i, 1}$ & $g_{i, 0}$\\ \hhline{====||=|====}
+						$R_{1}$ & $A_1^1$ & $A_2^1$ & $A_3^1$ & $w_1$ & 0.3733 & 0.6889 & -0.0168 & 0.2565 \\%\hhline{----||-}
+						$R_{2}$ & $A_1^1$ & $A_2^1$ & $A_3^2$ & $w_2$ & 0.1502 & 0.1266 & 0.3493 & 0.4002 \\%\hhline{----||-}
+						$R_{3}$ & $A_1^1$ & $A_2^2$ & $A_3^1$ & $w_3$ & 0.3397 & 0.4917 & 0.3824 & 0.6214 \\%\hhline{----||-}
+						$R_{4}$ & $A_1^1$ & $A_2^2$ & $A_3^2$ & $w_4$ & 0.3806 & 0.0735 & 0.8657 & 0.1984 \\%\hhline{----||-}
+						$R_{5}$ & $A_1^2$ & $A_2^1$ & $A_3^1$ & $w_5$ & 0.3162 & 0.4843 & 0.0866 & 0.0913 \\%\hhline{----||-}
+						$R_{6}$ & $A_1^2$ & $A_2^1$ & $A_3^2$ & $w_6$ & 0.7054 & 0.9211 & 0.3634 & 0.5877 \\%\hhline{----||-}
+						$R_{7}$ & $A_1^2$ & $A_2^2$ & $A_3^1$ & $w_7$ & 0.6594 & 0.7226 & -0.0437 & -0.1652 \\%\hhline{----||-}
+						$R_{8}$ & $A_1^2$ & $A_2^2$ & $A_3^2$ & $w_8$ & -0.1441 & -0.2612 & 1.1968 & -0.1784 \\%\hhline{----||-}
+				\end{tabular}
+				\caption{Ασαφής βάση κανόνων για το μοντέλο first-order TSK (BP)}
+				\label{tab:tsk_bp_rulebase}
+			\end{table}
+
+			Στο σχήμα \ref{fig:tsk_bp_input_sets} παρουσιάζονται τα τελικά σύνολα εισόδου που προέκυψαν από την εκπαίδευση του μοντέλου μας με τη χρήση back-propagation. Να σημειωθεί ότι ορίζουμε ως την είσοδο $x_1$ το $x(t-12)$, ως την είσοδο $x_2$ το $x(t-6)$, ως την είσοδο $x_3$ το $x(t)$ και ως την έξοδο $y = \hat{x}(t+6)$. Δεδομένου όμως ότι έχουμε μοντέλο TSK πρώτης τάξης, η έξοδος μας εκφράζεται ως γραμμικός συνδυασμός των εισόδων. Έτσι έχουμε:
+			$$ w_i = g_{i,3}x_3 + g_{i,2}x_2 + g_{i, 1}x_1 + g_{i,0},\, i = 1,2,\ldots,8 $$
+			Στον πίνακα \ref{tab:tsk_bp_rulebase} παρουσιάζεται η βάση κανόνων που προέκυψε για το μοντέλο μας με όλες τις τιμές των συντελεστών συμπεράσματος.
+			
+			\begin{figure}[h]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.25\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-16}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-17}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-18}
+				\end{subfigure}
+				\caption{Σύνολα εισόδου για το μοντέλο first-order TSK (BP)}
+				\label{fig:tsk_bp_input_sets}
+			\end{figure}
+
+			\clearpage
+
+		\subsection{Εκπαίδευση με υβριδικό αλγόριθμο}
+			\begin{wraptable}{r}{0.5\textwidth}
+				\centering
+				\begin{tabular}{c | c c c}
+					 & \bfseries{RMSE} & \bfseries{NMSE} & \bfseries{NDEI} \\ \hline{}
+					 $D_{trn}$ & 0.08247 & 0.10896 & 0.33009 \\ \hline
+					 $D_{val}$ & 0.07982 & 0.10758 & 0.32800 \\ \hline
+					 $D_{chk}$ & 0.07945 & 0.09586 & 0.30961 \\ 
+				\end{tabular}
+				\caption{Δείκτες σφαλμάτων για το μοντέλο first-order TSK (Hybrid)}
+				\label{tab:tsk_hybrid_error_metrics}
+			\end{wraptable}
+			Δημιουργούμε τα σύνολα $D_{trn}, D_{val}, D_{chk}$ τα οποία είναι της μορφής 
+			$$ \begin{bmatrix} x(t-12) & x(t-6) & x(t) & x(t+6) \end{bmatrix} $$
+			παίρνοντας τις τιμές της χρονοσειράς από το δοσμένο dataset. Αρχικοποιούμε το πρώτης τάξης TSK με τη χρήση του διαμερισμού πλέγματος, και δίνουμε τυχαίες τιμές στα βάρη του τμήματος συμπεράσματος.\\
+						
+			\begin{wrapfigure}{r}{0.5\textwidth}
+				\vspace{-15pt}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\includegraphics{figure-21}
+				\caption{Καμπύλες εκμάθησης για το μοντέλο first-order TSK (Hybrid)}
+				\label{fig:tsk_hybrid_learning_curves}
+			\end{wrapfigure}
+			
+			 Έπειτα, εκπαιδεύουμε το μοντέλο μας με τη χρήση υβριδικού αλγορίθμου για 1000 epochs χρησιμοποιώντας το $D_{trn}$ και το $D_{val}$ και θεωρούμε το βέλτιστο μοντέλο αυτό το οποίο προσφέρει το μικρότερο RMSE στα στοιχεία του συνόλου αξιολόγησης. Στο σχήμα \ref{fig:tsk_hybrid_predictions} παρουσιάζονται οι προβλέψεις του μοντέλου σε σύγκριση με τις πραγματικές τιμές, καθώς και το μεταξύ τους σφάλμα. Οι κόκκινες γραμμές διαχωρίζουν τα 3 σύνολα $D_{trn}, D_{val}, D_{chk}$ μεταξύ τους. Παρατηρούμε λοιπόν πως ακολουθούμε αρκετά καλά την χρονοσειρά με το σφάλμα να κυμαίνεται σε σχετικά αποδεκτά επίπεδα, όπως φαίνεται και από τις μετρικές που παρουσιάζονται στον πίνακα \ref{tab:tsk_bp_error_metrics}. Επίσης, παρατηρώντας τους δείκτες σφάλματος, βλέπει κανείς ότι ο κάθε δείκτης είναι σχεδόν ίδιος και για τα 3 σύνολα, πράγμα που σημαίνει ότι δεν έχουμε υπερεκπαίδευση. Παρατηρούμε ότι καμπύλη αξιολόγησης βρίσκεται μονίμως πάνω από την καμπύλη εκμάθησης, αλλά ανήκουν στην ίδια τάξη μεγέθους, οπότε δεν τίθενται ζητήματα υπερεκπαίδευσης. Επιπλέον παρατηρούμε ότι οι καμπύλες σφάλματος ξεκινάνε αμέσως από πολύ χαμηλότερο αρχικό σφάλμα, πράγμα το οποίο συμβαίνει διότι για να βρούμε τα βάρη των συμπερασμάτων επιλύουμε την κανονική εξίσωση, οπότε έχοντας βρει τα βέλτιστα συμπεράσματα εκτελούμε BP για να τοποθετήσουμε βέλτιστα τα σύνολα εισόδου. \\
+						
+			\begin{figure}[]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-19}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-20}
+				\end{subfigure}
+				\caption{Προβλέψεις μοντέλου first-order TSK (Hybrid) σε σύγκριση με τις πραγματικές τιμές της χρονοσειράς και το μεταξύ τους σφάλμα}
+				\label{fig:tsk_hybrid_predictions}
+			\end{figure}
+			
+			\begin{table}
+				\centering
+				\begin{tabular}[b]{r c c c||c|c|c|c|c}
+					 \bfseries{Rule} & $x_1$ & $x_2$ & $x_3$ & $y$ & $g_{i, 3}$ & $g_{i, 2}$ & $g_{i, 1}$ & $g_{i, 0}$\\ \hhline{====||=|====}
+						$R_{1}$ & $A_1^1$ & $A_2^1$ & $A_3^1$ & $w_1$ & -0.4076 & 2.1974 & 0.8368 & 0.3666 \\%\hhline{----||-}
+						$R_{2}$ & $A_1^1$ & $A_2^1$ & $A_3^2$ & $w_2$ & 1.9465 & -4.4620 & 12.2254 & -9.6454 \\%\hhline{----||-}
+						$R_{3}$ & $A_1^1$ & $A_2^2$ & $A_3^1$ & $w_3$ & 2.5440 & -23.9720 & 24.7996 & 1.8809 \\%\hhline{----||-}
+						$R_{4}$ & $A_1^1$ & $A_2^2$ & $A_3^2$ & $w_4$ & -2.1019 & 5.5147 & 1.2799 & -5.7762 \\%\hhline{----||-}
+						$R_{5}$ & $A_1^2$ & $A_2^1$ & $A_3^1$ & $w_5$ & 0.8252 & 1.3847 & -1.0601 & -1.5502 \\%\hhline{----||-}
+						$R_{6}$ & $A_1^2$ & $A_2^1$ & $A_3^2$ & $w_6$ & -4.5704 & 3.2347 & -5.7864 & 8.5256 \\%\hhline{----||-}
+						$R_{7}$ & $A_1^2$ & $A_2^2$ & $A_3^1$ & $w_7$ & -2.5098 & 2.7766 & -0.3148 & 1.2444 \\%\hhline{----||-}
+						$R_{8}$ & $A_1^2$ & $A_2^2$ & $A_3^2$ & $w_8$ & -0.5975 & -2.0537 & 1.8488 & 2.1737 \\%\hhline{----||-}
+				\end{tabular}
+				\caption{Ασαφής βάση κανόνων για το μοντέλο first-order TSK (Hybrid)}
+				\label{tab:tsk_hybrid_rulebase}
+			\end{table}
+			Στο σχήμα \ref{fig:tsk_hybrid_input_sets} παρουσιάζονται τα τελικά σύνολα εισόδου που προέκυψαν από την εκπαίδευση του μοντέλου μας με τη χρήση υβριδικού αλγορίθμου. Να σημειωθεί ότι ορίζουμε ως την είσοδο $x_1$ το $x(t-12)$, ως την είσοδο $x_2$ το $x(t-6)$, ως την είσοδο $x_3$ το $x(t)$ και ως την έξοδο $y = \hat{x}(t+6)$. Δεδομένου όμως ότι έχουμε μοντέλο TSK πρώτης τάξης, η έξοδος μας εκφράζεται ως γραμμικός συνδυασμός των εισόδων. Έτσι έχουμε:
+			$$ w_i = g_{i,3}x_3 + g_{i,2}x_2 + g_{i, 1}x_1 + g_{i,0},\, i = 1,2,\ldots,8 $$
+			Στον πίνακα \ref{tab:tsk_hybrid_rulebase} παρουσιάζεται η βάση κανόνων που προέκυψε για το μοντέλο μας με όλες τις τιμές των συντελεστών συμπεράσματος.
+			
+			\begin{figure}[]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.25\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-22}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-23}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-24}
+				\end{subfigure}
+				\caption{Σύνολα εισόδου για το μοντέλο first-order TSK (Hybrid)}
+				\label{fig:tsk_hybrid_input_sets}
+			\end{figure}
+	\newpage
+	\section{Πρόβλεψη πολλαπλών βημάτων}
+		\begin{wraptable}{r}{0.5\textwidth}
+				\centering
+				\begin{tabular}{c | c c c}
+					 & \bfseries{RMSE} & \bfseries{NMSE} & \bfseries{NDEI} \\ \hline{}
+					 $D_{trn}$ & 0.30579 & 1.49810 & 1.2240 \\ \hline
+					 $D_{val}$ & 0.27387 & 1.26670 & 1.1255 \\ \hline
+					 $D_{chk}$ & 0.32353 & 1.58970 & 1.2608 \\
+				\end{tabular}
+				\caption{Δείκτες σφαλμάτων για πρόβλεψη πολλαπλών βημάτων με μοντέλο first-order TSK (Hybrid)}
+				\label{tab:multiple_step_error_metrics}
+%				\vspace{10pt}
+		\end{wraptable}
+
+		Δημιουργούμε τα σύνολα $D_{trn}, D_{val}, D_{chk}$ τα οποία είναι της μορφής 
+		$$ \begin{bmatrix} x(t-12) & x(t-6) & x(t) & x(t+6) \end{bmatrix} $$
+		παίρνοντας τις τιμές της χρονοσειράς από το δοσμένο dataset. Αρχικοποιούμε το πρώτης τάξης 
+		TSK με τη χρήση του διαμερισμού πλέγματος με τέσσερα ασαφή σύνολα στην είσοδο αντί για
+		δύο, και δίνουμε τυχαίες τιμές στα βάρη του τμήματος συμπεράσματος.\\
+	
+		\begin{wrapfigure}{r}{0.5\textwidth}
+			\vspace{-20pt}
+		 	\setlength\figureheight{0.2\textwidth}
+			\setlength\figurewidth{0.4\textwidth}	
+			\centering
+			\includegraphics{figure-27}
+			\caption{Καμπύλες εκμάθησης το μοντέλο first-order TSK (Hybrid) που χρησιμοποιήθηκε για πρόβλεψη πολλαπλών βημάτων}
+			\label{fig:multiple_step_learning_curves}
+			\vspace{-10pt}
+		\end{wrapfigure}
+		
+		Εκπαιδεύουμε εκπαιδεύουμε το μοντέλο μας με τη χρήση υβριδικού αλγορίθμου για 1000 epochs χρησιμοποιώντας το $D_{trn}$ και το $D_{val}$ και θεωρούμε το βέλτιστο μοντέλο αυτό το οποίο προσφέρει το μικρότερο RMSE στα στοιχεία του συνόλου αξιολόγησης. Στο σχήμα \ref{fig:multiple_step_learning_curves} φαίνονται οι καμπύλες εκμάθησης και αξιολόγησης της διαδικασίας εκπαίδευσης, και παρατηρούμε ότι καμπύλη αξιολόγησης βρίσκεται μονίμως πάνω από την καμπύλη εκμάθησης, αλλά ανήκουν στην ίδια τάξη μεγέθους, οπότε δεν τίθενται ζητήματα υπερεκπαίδευσης. Μέχρι στιγμής έχουμε ακολουθήσει την ίδια διαδικασία με προηγουμένως, οπότε και το τελικό μοντέλο που προκύπτει είναι το ίδιο, με τις τελικές των παραμέτρων να παρουσιάζονται στο σχήμα \ref{fig:tsk_hybrid_input_sets} και στον πίνακα \ref{tab:tsk_hybrid_rulebase}. Έπειτα αναδράται η έξοδος στην είσοδο, παράγοντας σύνολα προβλέψεων της μορφής
+
+		\begin{align*}
+			\left\{ x(t-12), x(t-6), x(t)\right\} & \rightarrow \hat{x}(t+6) \\
+			\left\{ x(t-6), x(t), \hat{x}(t+6) \right\} & \rightarrow \hat{x}(t+12) \\
+			& \vdots \\
+			\left\{ \hat{x}(t+84), \hat{x}(t+88), \hat{x}(t+92) \right\} & \rightarrow \hat{x}(t+96)
+		\end{align*}
+
+ 		Στο σχήμα \ref{fig:multiple_step_predictions} παρουσιάζονται οι προβλέψεις πολλαπλών βημάτων του μοντέλου που εκπαιδεύσαμε σε σύγκριση με τις πραγματικές τιμές της χρονοσειράς. Παρατηρεί κανείς ότι πλέον οι προβλέψεις μας έχουν χάσει την ακρίβεια τους, προβλέποντας τις πραγματικές τιμές της χρονοσειράς με πολύ μέτρια επιτυχία, γεγονός που επαληθεύεται και από τον πίνακα \ref{tab:multiple_step_error_metrics}, όπου παρουσιάζονται οι μετρικές σφάλματος. Οι δείκτες σφάλματος έχουν σαφώς αυξημένες τιμές, αλλά ο κάθε δείκτης και για τα τρία σύνολα κυμαίνεται στα ίδια επίπεδα, οπότε δεν έχουμε υπερεκπαίδευση, πράγμα αναμενόμενο άλλωστε καθώς έχουμε το ίδιο μοντέλο που παρουσιάστηκε στο προηγούμενο ερώτημα. Παρατηρούμε ότι οι προβλέψεις μας επικεντρώνονται γύρω από τη μέση τιμή της χρονοσειράς με κάποια spikes να δημιουργούνται όταν συσσωρεύεται μεγάλο σφάλμα. Μάλιστα χρειάστηκε σε κάθε αναδρομικό βήμα να περιορίζουμε τις προβλέψεις μας στην περιοχή τιμών της χρονοσειράς, καθώς χωρίς saturation τα spikes αυτά, λόγω της συσσώρευσης του σφάλματος, έπαιρναν πολύ μεγάλες τιμές οδηγώντας έτσι το σύστημα μας σε ασταθείς καταστάσεις.
+
+ 		\begin{figure}[]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-25}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-26}
+				\end{subfigure}
+				\caption{Προβλέψεις πολλαπλών βημάτων μοντέλου first-order TSK (Hybrid) σε σύγκριση με τις πραγματικές τιμές της χρονοσειράς και το μεταξύ τους σφάλμα}
+				\label{fig:multiple_step_predictions}
+		\end{figure}
+			
+	\section{Υπερεκπαίδευση}
+			\begin{wraptable}{r}{0.5\textwidth}
+				\centering
+				\begin{tabular}{c | c c c}
+					 & \bfseries{RMSE} & \bfseries{NMSE} & \bfseries{NDEI} \\ \hline{}
+					 $D_{trn}$ & 0.06230 & 0.06217 & 0.24934 \\ \hline
+					 $D_{val}$ & 0.11716 & 0.23183 & 0.48149 \\ \hline
+					 $D_{chk}$ & 0.10988 & 0.18337 & 0.42822 \\
+				\end{tabular}
+				\caption{Δείκτες σφαλμάτων για το υπερεκπαιδευμένο μοντέλο first-order TSK (Hybrid)}
+				\label{tab:overfit_error_metrics}
+				\vspace{10pt}
+			\end{wraptable}
+			Δημιουργούμε τα σύνολα $D_{trn}, D_{val}, D_{chk}$ τα οποία είναι της μορφής 
+			$$ \begin{bmatrix} x(t-12) & x(t-6) & x(t) & x(t+6) \end{bmatrix} $$
+			παίρνοντας τις τιμές της χρονοσειράς από το δοσμένο dataset. Αρχικοποιούμε το πρώτης τάξης TSK με τη χρήση του διαμερισμού πλέγματος με τέσσερα ασαφή σύνολα στην είσοδο αντί για δύο, και δίνουμε τυχαίες τιμές στα βάρη του τμήματος συμπεράσματος.\\
+						
+			\begin{wrapfigure}{r}{0.5\textwidth}
+				\vspace{-15pt}
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\includegraphics{figure-33}
+				\caption{Καμπύλες εκμάθησης για το υπερεκπαιδευμένο μοντέλο first-order TSK (Hybrid)}
+				\label{fig:overfit_learning_curves}
+			\end{wrapfigure}
+			
+			 Έπειτα, εκπαιδεύουμε το μοντέλο μας με τη χρήση υβριδικού αλγορίθμου για 1000 epochs χρησιμοποιώντας το $D_{trn}$ και το $D_{val}$ και θεωρούμε το βέλτιστο μοντέλο αυτό το οποίο προσφέρει το μικρότερο RMSE στα στοιχεία του συνόλου αξιολόγησης. Στο σχήμα \ref{fig:overfit_predictions} παρουσιάζονται οι προβλέψεις του μοντέλου σε σύγκριση με τις πραγματικές τιμές, καθώς και το μεταξύ τους σφάλμα. Οι κόκκινες γραμμές διαχωρίζουν τα 3 σύνολα $D_{trn}, D_{val}, D_{chk}$ μεταξύ τους.  Παρατηρούμε λοιπόν ότι η αυξημένη πολυπλοκότητα έχει άμεσο αντίκτυπο στην ποιότητα των προβλέψεων καθώς βλέπει κανέις ότι στο σύνολο εκπαίδευσης το σφάλμα είναι πολύ μικρότερο από ότι είναι στα άλλα δύο σύνολα. Επιπλέον, οι δείκτες σφάλματος, που φαίνονται στον πίνακα \ref{tab:overfit_error_metrics}, για το σύνολο εκπαίδευσης είναι μεν οι πιο χαμηλοί από κάθε άλλη μοντελοποίηση, αλλά στα υπόλοιπα σύνολα είναι μεγαλύτεροι. Ακόμη, στο σχήμα \ref{fig:overfit_learning_curves} φαίνονται οι καμπύλες εκμάθησης και αξιολόγησης της διαδικασίας εκπαίδευσης, και παρατηρούμε ότι καμπύλη αξιολόγησης βρίσκεται μονιμως πάνω από την καμπύλη εκμάθησης. Όλα αυτά μας δείχνουν πως το μοντέλο μας είναι υπερεκπαδευμένο λόγω της υψηλής του πολυπλοκότητας.
+						
+			\begin{figure}[h]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.4\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-31}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.49\textwidth}
+					\includegraphics{figure-32}
+				\end{subfigure}
+				\caption{Προβλέψεις υπερεκπαιδευμένου μοντέλου first-order TSK (Hybrid) σε σύγκριση με τις πραγματικές τιμές της χρονοσειράς και το μεταξύ τους σφάλμα}
+				\label{fig:overfit_predictions}
+			\end{figure}
+			
+			Στο σχήμα \ref{fig:overfit_input_sets} παρουσιάζονται τα τελικά σύνολα εισόδου που προέκυψαν από την εκπαίδευση του μοντέλου μας με τη χρήση υβριδικού αλγορίθμου. Να σημειωθεί ότι ορίζουμε ως την είσοδο $x_1$ το $x(t-12)$, ως την είσοδο $x_2$ το $x(t-6)$, ως την είσοδο $x_3$ το $x(t)$ και ως την έξοδο $y = \hat{x}(t+6)$. Δεδομένου όμως ότι έχουμε μοντέλο TSK πρώτης τάξης, η έξοδος μας εκφράζεται ως γραμμικός συνδυασμός των εισόδων. Έτσι έχουμε:
+			$$ w_i = g_{i,3}x_3 + g_{i,2}x_2 + g_{i, 1}x_1 + g_{i,0},\, i = 1,2,\ldots,64 $$
+			Οι παράμετροι $g_{i,j}$ δεν παρουσιάζονται αναλυτικά εδώ, καθώς μιλάμε για 64 κανόνες από 4 παραμέτρους ο κάθε ένας και δεν θα είχε νόημα. Το πλήρες το μοντέλο με όλες του τις παραμέτρους μπορεί να βρεθεί στα αρχεία κώδικα.
+			\begin{figure}[h]
+			 	\setlength\figureheight{0.2\textwidth}
+				\setlength\figurewidth{0.25\textwidth}	
+				\centering
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-34}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-35}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.32\textwidth}
+					\includegraphics{figure-36}
+				\end{subfigure}
+				\caption{Σύνολα εισόδου για το υπερεκπαιδευμένο μοντέλο first-order TSK (Hybrid)}
+				\label{fig:overfit_input_sets}
+			\end{figure}
+\end{document}
