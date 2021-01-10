@@ -1,0 +1,271 @@
+
+\documentclass[11pt,a4paper,titlepage, oneside]{article}
+
+%
+\usepackage[left=1in,right=1in,top=1in,bottom=1.5in]{geometry}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+%\usepackage{unicode-math}
+\usepackage[lite]{mtpro2}
+\usepackage[no-math]{fontspec}
+\setromanfont{Times}
+\setsansfont{Source Sans Pro Semibold}
+%\setmathfont{Libertinus Math}
+
+%\usepackage{polyglossia}
+\usepackage{xgreek}
+
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{graphicx}
+\usepackage{xltxtra}
+\usepackage{makeidx}
+\usepackage{enumerate}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{grffile}
+\usepackage{adjustbox}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{contour}
+\contourlength{1.2pt}
+
+% Tikz
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{patterns}
+
+% Margins
+\topmargin=-0.45in
+%\evensidemargin=0in
+%\oddsidemargin=0in
+%\textwidth=6in
+%\textheight=9in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{} % Top left header
+\chead{\hmwkClass\ - \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Σελίδα\ \thepage\ από\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{1}
+
+%----------------------------------------------------------------------------------------
+%	LOCALIZATION
+%----------------------------------------------------------------------------------------
+
+\renewcommand\figurename{Σχήμα}
+\renewcommand\contentsname{Περιεχόμενα}
+\renewcommand\indexname{Ευρετήριο}
+\renewcommand\tablename{Πίνακας}
+\renewcommand\appendixname{Παράρτημα}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Εργασία 1 - Σειρά 7} % Assignment title
+\newcommand{\hmwkClass}{Ασαφή Συστήματα} % Course/class
+\newcommand{\hmwkAuthorName}{Δημανίδης Ιωάννης} % Your name
+\newcommand{\hmwkAuthorAEM}{8358} % Your ΑΕΜ
+
+%----------------------------------------------------------------------------------------
+%	MISC OPTIONS
+%----------------------------------------------------------------------------------------
+
+\graphicspath{{./figures/}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\makeatletter
+\newcommand{\xRightarrow}[2][]{\ext@arrow 0359\Rightarrowfill@{#1}{#2}}
+\makeatother
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+\newlength\figureheight
+\newlength\figurewidth
+
+\allowdisplaybreaks[1]
+
+\setlength\figureheight{2.56cm}
+\setlength\figurewidth{0.42\textwidth}	
+
+\titleformat*{\section}{\Large\sffamily}
+\titleformat*{\subsection}{\sffamily\bfseries\boldmath}
+\titlespacing*{\section}{0pt}{1.2em}{0.3em}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+	\vspace{5cm}
+	\Huge{\sffamily{\hmwkClass}}\\
+	\vspace{0.1em}
+	\LARGE{\hmwkTitle}\\
+	\vspace{7cm}
+}
+
+\author{\sffamily{\hmwkAuthorName\ - \hmwkAuthorAEM}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle
+	
+	%----------------------------------------------------------------------------------------
+	%	TABLE OF CONTENTS
+	%----------------------------------------------------------------------------------------
+	
+	%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+	
+	%\newpage
+	%\tableofcontents
+	%\clearpage
+	%\newpage
+	
+	
+	%----------------------------------------------------------------------------------------
+	%	Document
+	%----------------------------------------------------------------------------------------
+	\section{Αρχική μοντελοποίηση}
+	Επιθυμούμε να μοντελοποιήσουμε τη μη-γραμμική συνάρτηση $y = 5 \cos(x)$ με τη χρήση ασαφών συστημάτων, συνεπώς ορίζουμε το χώρο εισόδου $X = [0\degree, 360\degree]$ και το χώρο εξόδου $Y = [-5, 5]$. Στο σχήμα \ref{fig:fuzzy_set_plots_1} έχουμε τα ασαφή σύνολα στους χώρους εισόδου και εξόδου αντίστοιχα.\\
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-1}
+		\end{subfigure}
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-2}
+		\end{subfigure}
+		\caption{Ασαφή σύνολα είσοδου και εξόδου}
+		\label{fig:fuzzy_set_plots_1}
+	\end{figure}
+	
+	Η είσοδος με την έξοδο συνδέονται μέσω της ακόλουθης βάσης κανόνων:
+	\begin{align*}
+		& R_1\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_1 \right)\ \text{OR}\ \left( x\ \text{is}\ \text{A}_5 \right)\ \text{THEN}\ \left( y\ \text{is}\ \text{PL} \right) \\
+		\text{ALSO}\ & R_2\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_2 \right)\ \text{OR}\ \left( x\ \text{is}\ \text{A}_4 \right)\ \text{THEN}\ \left( y\ \text{is}\ \text{ZE} \right) \\
+		\text{ALSO}\ & R_3\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_3 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{NL} \right)
+	\end{align*}
+	
+	Η παραπάνω βασή κανόνων γράφεται και σε κανονική μορφή ως εξής:
+	\begin{align*}
+		& R_1\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_1 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{PL} \right) \\
+		\text{ALSO}\ & R_2\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_5 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{PL} \right) \\
+		\text{ALSO}\ & R_3\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_2 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{ZE} \right) \\
+		\text{ALSO}\ & R_4\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_4 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{ZE} \right) \\
+		\text{ALSO}\ & R_5\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_3 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{NL} \right)
+	\end{align*}
+
+	Διακριτοποιούμε την είσοδο ανά $5\degree$ και σχηματίζουμε τους πίνακες συμμετοχής $\text{A}_1, \dotsc, \text{A}_5$ και έπειτα διακριτοποιούμε αναλόγως την έξοδο, σχηματίζοντας τους πίνακες συμμετοχής NL, ZE, PL. Υλοποιούμε τους κανόνες ως ασαφείς σχέσεις μεταξύ των premise και consequent sets με τη χρήση του τελεστή συμπερασμού Mamdani $\mathcal{R}_c$, οπότε έχουμε για παράδειγμα, $R_1 = \mathcal{R}_c \left(\text{A}_1, \text{PL}\right)$.\\
+		
+	Συνεπώς για τη singleton είσοδο $x = 70\degree$, ορίζουμε το ασαφές σύνολο $\text{A}'$ το οποίο περιγράφεται από έναν πίνακα που έχει παντού μηδενική συμμετοχή εκτός από την θέση $x = 70\degree$, όπου η συμμετοχή είναι μοναδιαία. Επομένως, μπορούμε να εξάγουμε τα επιμέρους συμπεράσματα $\text{B}_i$ για τους αντίστοιχους κανόνες $R_i$ με τη σύνθεση του $\text{A}'$ με την σχέση $R_i$, μέσω του τελεστή σύνθεσης max-min, και έπειτα να τροφοδοτήοσυμε με αυτά των αποσαφοποιητή COS ώστε να εξάγουμε το $y^\star$. Στο σχήμα \ref{fig:fuzzy_set_firings_1} βλέπουμε οτι καθώς τα μόνα σύνολα τα οποία δεν έχουν μηδενική συμμετοχή για $x = 70\degree$ είναι τα $\text{A}_1$ και $\text{A}_2$, ενεργοποιούνται οι κανόνες $R_1, R_3$ με αντίστοιχους βαθμούς εκπλήρωσης $\text{DOF}_{\text{R}_1} = 0.2222$ και $\text{DOF}_{\text{R}_3} = 0.7778$. Οπότε, για τη προκείμενη είσοδο, το ασαφές μοντέλο μας επιστρέφει $y^\star = 0.4882$, ενώ η πραγματική τιμή της συνάρτησης που θέλουμε να μοντελοποιήσουμε είναι $y = 5 \cos(70\degree) = 1.7101$.\\
+	
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-3}
+		\end{subfigure}
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-4}
+		\end{subfigure}
+		\caption{Βαθμοί ενεργοποίησης των κανόνων για singleton είσοδο}
+		\label{fig:fuzzy_set_firings_1}
+	\end{figure}
+	
+	Επαναλαμβάνοντας την ίδια διαδικασία για όλες τις τιμές της εισόδου που προέκυψαν από την διακριτοποίησή της, παράγουμε τη σχέση εισόδου-εξόδου του συστήματός μας, δινοντάς μας την εκτίμηση $\hat{y}$ της συνάρτησης $y = 5 \cos(x)$, που αποτυπώνεται στο σχήμα \ref{fig:xy_relations_1}. Το μέσο τετραγωνικό σφάλμα μεταξύ της πραγματικής συνάρτησης και της ασαφούς εκτίμησής μας είναι $\mathbb{E}[e^2] = 4.6468$, το οποίο δεν είναι ιδιαίτερα αποδεκτό. Όμως, το υψηλό σφάλμα είναι αναμενόμενο καθώς δεν έχουμε αρκετά ασαφή σύνολα για επαρκή μοντελοποίηση της συνάρτησης και το μόνο που μοντελοποιείται σωστά είναι το πρόσημο.
+		
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-5}
+		\end{subfigure}
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-6}
+		\end{subfigure}
+		\caption{Σύγκριση $y, \hat{y}$ και το μεταξύ τους σφάλμα $e = y - \hat{y}$}
+		\label{fig:xy_relations_1}
+	\end{figure}
+	
+	\section{Επανασχεδίαση}
+	Βλέποντας ότι η αρχική μας μοντελοποίηση κρίθηκε ανεπαρκής, θεωρούμε στο χώρο της είσοδου 5 ασαφή σύνολα έναντι των 3 που είχαμε προηγούμενως. Αυτό συνεπάγεται ότι θα πρέπει να εισάγουμε και νέα σύνολα στο χώρο της εισόδου, καθώς και να ξαναδημιουργήσουμε βάση κανόνων. Έχοντας λοιπόν 5 σύνολα στην έξοδο, χρειαζόμαστε 8 σύνολα στην είσοδο και το γιατί είναι προφανές άμα δει κανείς ένα πίνακα τιμών του συνημιτόνου. Δίνουμε έμφαση ώστε για κάθε σημείο $x \in X$, το άθροισμα των συμμετοχών των συνόλων στα οποία ανήκει να είναι 1. Έτσι ένα σημείο δε θα ανήκει σε πάνω από 2 σύνολα ταυτόχρονα και οι συναρτήσεις συμμετοχής θα είναι συμπληρωματικές, όπως ήταν και στην αρχική σχεδίαση. Οι τελικοί διαμερισμοί των χώρων εισόδου και εξόδου φαίνονται στο σχήμα \ref{fig:xy_set_plots_2}. Έπειτα δημιουργούμε μια νέα βάση κανόνων που να ανταποκρίνεται στα νέα δεδομένα του συστήματος, η οποία έχει ως εξής:
+	\begin{align*}
+		& R_1\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_1 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{PL} \right) \\
+		\text{ALSO}\ & R_2\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_9 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{PL} \right) \\
+		\text{ALSO}\ & R_3\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_2 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{PM} \right) \\
+		\text{ALSO}\ & R_4\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_8 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{PM} \right) \\
+		\text{ALSO}\ & R_5\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_3 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{ZE} \right) \\
+		\text{ALSO}\ & R_6\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_7 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{ZE} \right) \\
+		\text{ALSO}\ & R_7\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_4 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{NM} \right) \\
+		\text{ALSO}\ & R_8\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_6 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{NM} \right) \\
+		\text{ALSO}\ & R_9\colon\ \text{IF}\ \left( x\ \text{is}\ \text{A}_5 \right)\  \text{THEN}\ \left( y\ \text{is}\ \text{NL} \right)
+	\end{align*}
+	
+	Ακολουθούμε την ίδια διαδικασία όπως προηγούμενως και διακριτοποίουμε την είσοδο ανά $5\degree$ και σχηματίζουμε τους πίνακες συμμετοχής $\text{A}_1, \dotsc, \text{A}_9$ και έπειτα διακριτοποιούμε αναλόγως την έξοδο, σχηματίζοντας τους πίνακες συμμετοχής NL, NM, ZE, PM, PL. Υλοποιούμε τους κανόνες ως ασαφείς σχέσεις μεταξύ των premise και consequent sets με τη χρήση του τελεστή συμπερασμού Mamdani $\mathcal{R}_c$, οπότε έχουμε για παράδειγμα, $R_1 = \mathcal{R}_c \left(\text{A}_1, \text{PL}\right)$.\\
+	
+	Επομένως για τη singleton είσοδο $x = 70\degree$, ορίζουμε το ασαφές σύνολο $\text{A}'$ και εξάγουμε τα νέα συμπεράσματα $\text{B}_i$ για τους αντίστοιχους κανόνες $R_i$. Όπως φαίνεται και στο σχήμα \ref{fig:fuzzy_set_firings_2}, το σημείο $x = 70\degree$ έχει μη-μηδενική συμμετοχή μόνο στα σύνολα $\text{A}_2$  και $\text{A}_3$, οπότε ενεργοποιούνται μονάχα οι κανόνες $R_3$ και $R_5$ με βαθμούς εκπλήρωσης $\text{DOF}_{\text{R}_3} = 0.6667$ και $\text{DOF}_{\text{R}_5} = 0.3333$ αντίστοιχα. Οπότε για τη δοσμένη είσοδο η έξοδος του αποσαφοποιητή είναι $y^\star = 1.5385$, τιμή που είναι πολύ κοντά στην πραγματική τιμή $y = 5 \cos(70\degree) = 1.7101$, ειδικά σε σχέση με την προγούμενη εκτίμηση.\\
+	
+	\begin{figure}
+		\centering
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-7}
+		\end{subfigure}
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-8}
+		\end{subfigure}
+		\caption{Καινούρια ασαφή σύνολα είσοδου και εξόδου}
+		\label{fig:xy_set_plots_2}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-9}
+		\end{subfigure}
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-10}
+		\end{subfigure}
+		\caption{Βαθμοί ενεργοποίησης των νέων κανόνων για singleton είσοδο}
+		\label{fig:fuzzy_set_firings_2}
+	\end{figure}
+	
+	Επαναλαμβάνοντας την ίδια διαδικασία για όλες τις τιμές της εισόδου που προέκυψαν από την διακριτοποίησή της, παράγουμε τη σχέση εισόδου-εξόδου του συστήματός μας, δινοντάς μας την νέα εκτίμηση $\hat{y}$ της συνάρτησης $y = 5 \cos(x)$, που αποτυπώνεται στο σχήμα \ref{fig:xy_relations_2}. Το μέσο τετραγωνικό σφάλμα μεταξύ της πραγματικής συνάρτησης και της ασαφούς εκτίμησής μας είναι $\mathbb{E}[e^2] = 0.8147$, το οποίο εμφανής βελτίωση από το προγούμενο μοντέλο μας. Μαλιστά, παρατηρεί κανείς πως για τις ενδιάμεσες τιμές, δηλαδή όταν $x \in [60\degree, 120\degree]$ ή $x \in [240\degree, 300\degree]$, η προσέγγισή μας είναι αρκετά ικανοποιητική. Αυτό μπορεί να οφείλεται στο ότι για αυτές τις τιμές εισόδου συνάρτηση $y$ εμφανίζει σχεδόν γραμμική συμπεριφόρα καθώς και στο γεγονός ότι δεν υπάρχουν σημεία καμπής στις περιοχές αυτές, συνεπώς η $y$ είναι εύκολα προβλέψιμη. Επιπλέον φαίνεται ότι τα σημεία καμπής αποτελούν τις περιοχές με την μέγιστη ανακρίβεια, όπου εκεί το απόλυτο σφάλμα $e$ ξεπερνάει τη μονάδα. Αυτό συμβαίνει γιατί στις περιοχές αυτές οι συναρτήσεις συμμετοχής είναι μη-συμμετρικά τρίγωνα και δεδομένου οτί χρησιμοποιούμε αποσαφοποιήτη COS οι εκάστοτε τιμές $y^\star$ της κάθε συνάρτησης συμμετοχής για τα τρίγωνα αυτά δεν βρίσκονται στα ιδανικά σημεία. Π.χ. όταν έχουμε singleton είσοδο $x = 180\degree$, το $x$ ανήκει πλήρως στο $\text{A}_5$ και ο βαθμός εκπλήρωσης του κανόνα $R_9$ είναι $\text{DOF}_{\text{R}_9} = 1$, παρόλα αυτά προκύπτει ότι το $y^\star = -4.213$ αντί για -5 που θα ήταν το ιδανικό, πράγμα το οποίο θα μπορούσε να λυθεί με τη χρήση διαφορετικού αποσαφοποιητή.
+
+	\begin{figure}
+		\centering
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-11}
+		\end{subfigure}
+		\begin{subfigure}[c]{0.495\textwidth}
+			\includegraphics{figure-12}
+		\end{subfigure}
+		\caption{Σύγκριση $y, \hat{y}$ και το μεταξύ τους σφάλμα $e = y - \hat{y}$}
+		\label{fig:xy_relations_2}
+	\end{figure}
+\end{document}

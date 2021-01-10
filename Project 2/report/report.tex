@@ -1,0 +1,373 @@
+
+\documentclass[11pt,a4paper,titlepage, oneside]{article}
+
+%
+\usepackage[left=1in,right=1in,top=1in,bottom=1.5in]{geometry}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+%\usepackage{unicode-math}
+\usepackage[lite]{mtpro2}
+\usepackage[no-math]{fontspec}
+\setromanfont{Times}
+\setsansfont{Source Sans Pro Semibold}
+%\setmathfont{Libertinus Math}
+
+%\usepackage{polyglossia}
+\usepackage{xgreek}
+
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{graphicx}
+\usepackage{xltxtra}
+\usepackage{makeidx}
+\usepackage{enumerate}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{grffile}
+\usepackage{adjustbox}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{hhline} 
+\usepackage{diagbox}
+\usepackage{contour}
+\contourlength{1.2pt}
+
+% Tikz
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usetikzlibrary{shapes,arrows,calc}
+\usepackage{blox}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{patterns, shadings, tikzmark}
+
+% Margins
+\topmargin=-0.45in
+%\evensidemargin=0in
+%\oddsidemargin=0in
+%\textwidth=6in
+%\textheight=9in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{} % Top left header
+\chead{\hmwkClass\ - \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Σελίδα\ \thepage\ από\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{1}
+
+%----------------------------------------------------------------------------------------
+%	LOCALIZATION
+%----------------------------------------------------------------------------------------
+
+\renewcommand\figurename{Σχήμα}
+\renewcommand\contentsname{Περιεχόμενα}
+\renewcommand\indexname{Ευρετήριο}
+\renewcommand\tablename{Πίνακας}
+\renewcommand\appendixname{Παράρτημα}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Εργασία 2 - Σειρά 7} % Assignment title
+\newcommand{\hmwkClass}{Ασαφή Συστήματα} % Course/class
+\newcommand{\hmwkAuthorName}{Δημανίδης Ιωάννης} % Your name
+\newcommand{\hmwkAuthorAEM}{8358} % Your ΑΕΜ
+
+%----------------------------------------------------------------------------------------
+%	MISC OPTIONS
+%----------------------------------------------------------------------------------------
+\graphicspath{{./figures/}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\makeatletter
+\newcommand{\xRightarrow}[2][]{\ext@arrow 0359\Rightarrowfill@{#1}{#2}}
+\makeatother
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+\newlength\figureheight
+\newlength\figurewidth
+
+\allowdisplaybreaks[1]
+
+\setlength\figureheight{3.27cm}
+\setlength\figurewidth{0.42\textwidth}	
+
+\titleformat*{\section}{\Large\sffamily}
+\titleformat*{\subsection}{\sffamily\bfseries\boldmath}
+\titlespacing*{\section}{0pt}{1.2em}{0.3em}
+
+
+\tikzset{
+	block/.style = {draw, fill=white, rectangle, minimum height=2.5em, minimum width=2em, node distance=1.5cm},%
+	tmp/.style  = {coordinate},%
+	sum/.style= {draw, fill=white, circle, node distance=1.25cm},%
+	input/.style = {coordinate},%
+	output/.style= {coordinate},%
+	pinstyle/.style = {pin edge={to-,thin,black}	}%
+}
+
+\tikzset{%
+  saturation block/.style={%
+    draw, minimum height=2.5em, minimum width=2.5em,
+    node distance=1.5cm,
+    path picture={
+      % Get the width and height of the path picture node
+      \pgfpointdiff{\pgfpointanchor{path picture bounding box}{north east}}%
+        {\pgfpointanchor{path picture bounding box}{south west}}
+      \pgfgetlastxy\x\y
+      % Scale the x and y vectors so that the range
+      % -1 to 1 is slightly shorter than the size of the node
+      \tikzset{x=\x*.4, y=\y*.4}
+      %
+      % Draw annotation
+      \draw (-1,0) -- (1,0) (0,-1) -- (0,1); 
+      \draw (-1,-.7) -- (-.7,-.7) -- (.7,.7) -- (1,.7);
+    }
+  }
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+	\vspace{5cm}
+	\Huge{\sffamily{\hmwkClass}}\\
+	\vspace{0.1em}
+	\LARGE{\hmwkTitle}\\
+	\vspace{7cm}
+}
+
+\author{\sffamily{\hmwkAuthorName\ - \hmwkAuthorAEM}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle
+	
+	%----------------------------------------------------------------------------------------
+	%	TABLE OF CONTENTS
+	%----------------------------------------------------------------------------------------
+	
+	%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+	
+	%\newpage
+	%\tableofcontents
+	%\clearpage
+	%\newpage
+	
+	
+	%----------------------------------------------------------------------------------------
+	%	Document
+	%----------------------------------------------------------------------------------------
+	\section{Σχεδίαση γραμμικού ελεγκτή}
+	Έχουμε ένα σύστημα το οποίο περιγράφεται από την ακόλουθη συνάρτηση μεταφοράς:
+	$$ 	G_p(s) = \dfrac{10}{(s+1)(s+9)} 	$$
+	το οποίο θέλουμε να ελέγξουμε με τη χρήση ενός γραμμικού PI ελεγκτή, ώστε να τηρούνται κάποιες προδιαγραφές. Πιο συγκεκριμένα θέλουμε χρόνο ανόδου μικρότερο από 1.2 δευτερόλεπτα και μην εμφανίζονται υπερυψώσεις πάνω από 10\%. Ο PI ελεγκτής λοιπόν θα είναι της μορφής
+	$$ G_c(s) = \dfrac{K_P (s+c)}{s}$$
+	δίνοντάς μας έτσι τελική συνάρτηση μεταφοράς ανοιχτού βρόχου:
+	$$ G_{ol}(s) = \dfrac{10 K_P (s+c)}{s (s+1) (s+9)} $$
+	Έχοντας μοναδιαία αρνητική ανάδραση, τοποθετούμε το μηδενικό του ελεγκτή κόντα στον κυριαρχό πόλο του συστήματος, δηλαδή το -1, και έτσι έχουμε $c = 2$. Από τον γεωμετρικό τόπο ριζών ρυθμίζουμε το κέρδος μέχρις ότου να πετύχουμε τις επιθυμητές προδιαγραφές, καταλήγοντας σε $K_P = 0.75$. Επιπλέον έχοντας το αναλογικό κέρδος, καθώς και την θέση του μηδενικού βρίσκουμε το ολοκληρωτικό κέρδος $K_I = 1.5$. Εντέλει, πετυχαίνουμε χρόνο ανόδου $t_r = 1.1532\,\mathrm{s} $ και υπερύψωση 8.9\%. Στο σχήμα \ref{fig:pi_plots} φαίνονται ο γεωμετρικός τόπος ριζών του συστήματος, καθώς και η απόκριση κλειστού βρόχου.
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+			\includegraphics{figure-1}
+%			\caption{Block LMS (naive)}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.49\textwidth}
+			\includegraphics{figure-2}
+%			\caption{Block LMS (linear algebra)}
+		\end{subfigure}
+		\caption{Γεωμετρικός τόπος ριζών και απόκριση ελεγχόμενου συστήματος}
+		\label{fig:pi_plots}
+	\end{figure}
+
+	\section{Σχεδίαση ασαφούς ελεγκτή}
+	Μπορούμε να αντικαταστήσουμε τον γραμμικό PI ελεγκτή με έναν αντίστοιχο ασαφή PI ελεγκτή. Γνωρίζοντας ότι η είσοδος αναφοράς $r \in [0, 60]$, κανονικοποιούμε το σφάλμα $e$ και έχουμε $\tilde{e} = \tfrac{e}{60}$ καθώς και $\Delta \tilde{e} = \tfrac{\Delta e}{60}$. Η χρονική σταθερά ολοκλήρωσης δίνεται από $T_i = \tfrac{K_P}{K_P}$, οπότε έχουμε $\alpha \approx T_i = 0.5$. Επιπλέον για αρχικές τιμές των $K_e, K$ επιλέγουμε $K_e = 1$ και $K = 1.5$. Εφόσον χρησιμοποιούμε PI ελεγκτή, το ασαφές σύστημα συμπερασμού έχει δύο μεταβλητές ως είσοδο, $E,\  \dot{E}$, και μία μεταβλητή εξόδου $\dot{U}$. Οι μεταβλητές αυτές ορίζονται στο διάστημα $[-1, 1]$ και ο διαμερισμός του χώρου τους δίνεται στο σχήμα \ref{fig:fuzzy_variable_partitioning}. Έχοντας διαμερίσει τις μεταβλητές σε λεκτικές τιμές, μπορούμε να εξάγουμε την βάση κανόνων, η οποία φαίνεται αναλυτικά στον πίνακα \ref{tab:fuzzy_rulebase}.		
+	\begin{figure}[]
+		\centering
+		\setlength\figurewidth{0.92\textwidth}	
+		\includegraphics{figure-3}
+		\caption{Διαμερισμός χώρου ασαφών μεταβλητών}
+		\label{fig:fuzzy_variable_partitioning}
+	\end{figure}
+	\begin{table}[]
+		\centering
+		\begin{tabular}[b]{|c||c|c|c|c|c|c|c|c|c|}
+			\hhline{-||---------}
+            \backslashbox{$\dot{\textbf{E}}$}{$\textbf{E}$} & \bfseries{NV} & \bfseries{NL} & \bfseries{NM} & \bfseries{NS} & \bfseries{ZR} & \bfseries{PS} & \bfseries{PM} & \bfseries{PL} & \bfseries{PV}\\ \hhline{=::=========}
+             \bfseries{PV} & ZR & PS & PM & PL & PV & PV & PV & PV & PV\\ \hhline{-||---------}
+             \bfseries{PL} & NS & ZR & PS & PM & PL & PV & PV & PV & PV\\ \hhline{-||---------}
+             \bfseries{PM} & NM & NS & ZR & PS & PM & PL & PV & PV & PV\\ \hhline{-||---------}
+             \bfseries{PS} & NL & NM & NS & ZR & PS & PM & PL & PV & PV\\ \hhline{-||---------}
+             \bfseries{ZR} & NV & NL & NM & NS & ZR & PS & PM & PL & PV\\ \hhline{-||---------}
+             \bfseries{NS} & NV & NV & NL & NM & NS & ZR & PS & PM & PL\\ \hhline{-||---------}
+             \bfseries{NM} & NV & NV & NV & NL & NM & NS & ZR & PS & PM\\ \hhline{-||---------}
+             \bfseries{NL} & NV & NV & NV & NV & NL & NM & NS & ZR & PS\\ \hhline{-||---------}
+             \bfseries{NV} & NV & NV & NV & NV & NV & NL & NM & NS & ZR\\ \hhline{-||---------}            
+        \end{tabular}
+   		\caption{Βάση κανόνων του ασαφούς PI ελεγκτή}
+		\label{tab:fuzzy_rulebase}
+    \end{table}
+
+	\begin{figure}[]
+		\centering
+		\begin{tikzpicture}[auto, node distance=0.75cm,>=latex']
+    		\node [input] (e) {};
+    		\node [block, right of=e, node distance=1cm] (norm) {$\dfrac{1}{60}$};
+    		\node [tmp, right of=norm] (tmp1) {};
+    		\node [tmp, right of=tmp1] (tmp2) {};
+	   		\node [block, below of=tmp2] (delay1) {$z^{-1}$};
+    		\node [sum, right of=delay1] (sum1) {};
+    		\node [block, right of=sum1] (aKe) {$\alpha K_e$};
+    		\node [tmp, above of=sum1, node distance=1.5cm] (tilde_e) {};
+			\node [block, right of=aKe, node distance=1.25cm] (tim1) {$\dfrac{1}{T}$};
+			\node [block, above of=tim1] (Ke) {$K_e$};
+    		\node [saturation block, right of=Ke, node distance=1.25cm] (sat1){};
+			\node [saturation block, right of=tim1, node distance=1.25cm] (sat2){};
+			\node [tmp, right of=sat1, node distance=1.25cm] (tmp3) {};
+			\node [tmp, right of=sat2, node distance=1.25cm] (tmp4) {};
+			\node [block] at ($(tmp3)!0.5!(tmp4)$) (fis) {FIS};
+			\node [block, right of=fis, node distance=1.25cm] (tim2) {$T$};
+			\node [block, right of=tim2, node distance=1.25cm] (K) {$K$};
+			\node [block, right of=K, node distance=1.25cm] (denorm) {$60$};
+			\node [sum, right of=denorm, node distance=1.25cm] (sum2) {};
+			\node [tmp, right of=sum2] (tmp5) {};
+			\node [tmp, right of=tmp5] (out) {};
+			\node [block, below of=tmp5] (delay2) {$z^{-1}$};
+    		\draw [->] (e) -- node{$e$} (norm);
+    		\draw [->] (tmp1) |- (delay1);
+    		\draw [->] (delay1) -- node[pos=0.85]{$-$} (sum1);
+    		\draw [->] (norm) -- node[pos=0.51]{$\tilde{e}$} (Ke);
+    		\draw [->] (tilde_e) -- node[pos=0.85]{$+$} (sum1);
+    		\draw [->] (sum1) -- node{$\Delta \tilde{e}$} (aKe);
+    		\draw [->] (Ke) -- (sat1);
+    		\draw [->] (aKe) -- (tim1);
+    		\draw [->] (tim1) -- (sat2);
+    		\draw [->] (sat1) -| node{$E$} (fis);
+    		\draw [->] (sat2) -| node[right of=fis, node distance=1.3ex]{$\dot{E}$} (fis);
+    		\draw [->] (fis) -- (tim2);
+    		\draw [->] (tim2) -- (K);
+    		\draw [->] (K) -- (denorm);
+    		\draw [->] (denorm) -- node[pos=0.85]{$+$} (sum2);
+			\draw [->] (sum2) -- node[pos=1]{$u$} (out);
+			\draw [->] (tmp5) -- (delay2);
+			\draw [->] (delay2) -| node[pos=0.95]{$+$} (sum2);
+    	\end{tikzpicture}
+		\caption{Block διάγραμμα ασαφούς PI ελεγκτή}
+		\label{fig:flcpi_block_diag}
+	\end{figure}
+	
+  	\section{Σενάριο 1}
+	\begin{wrapfigure}{r}{0.5\textwidth}
+		\setlength\figureheight{2.67cm}
+		\vspace{-30pt}
+		\centering
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics{figure-4}
+			\caption{$K_e = 1, K = 1.5, \alpha = 0.5$}
+			\label{fig:flcpi_responses_a}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics{figure-5}
+			\caption{$K_e = 1, K = 11, \alpha = 0.5$}
+			\label{fig:flcpi_responses_b}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics{figure-6}
+			\caption{$K_e = 1, K = 11, \alpha = 0.2167$}
+			\label{fig:flcpi_responses_c}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics{figure-7}
+			\caption{$K_e = 3, K = 11, \alpha = 0.2167$}
+			\label{fig:flcpi_responses_d}
+		\end{subfigure}
+		\caption{Αποκρίσεις FLC PI με διαφορετικά κέρδη κλιμακοποίησης}
+		\label{fig:flcpi_responses}
+	\end{wrapfigure}
+	Υλοποιούμε τον ασαφή ελεγκτή με τα αρχικά κέρδη κλιμακοποίησης που υπολογίσαμε προηγουμένως, και όπως φαίνεται και στο σχήμα \ref{fig:flcpi_responses_a}, η αρχική σχεδίαση δεν πληρεί τις προδιαγραφές και μάλιστα ο ελεγκτής είναι πιο αργός από τον αντίστοιχο γραμμικό με χρόνο ανόδου $t_r = 1.5785\,\mathrm{s}$ και overshoot 5.4\%. Η υπερύψωση είναι εντός προδιαγραφών, αλλά ο χρόνος ανόδου είναι απαράδεκτος. Συνεπώς, για να επιταχύνουμε τη σύγκλιση του ελεγκτή στο σήμα αναφοράς, αυξάνουμε το κέρδος $K$, και πλέον έχουμε την απόκριση του σχήματος \ref{fig:flcpi_responses_b}. Έτσι, μηδενίζουμε τελείως την υπερύψωση, και μειώνουμε το χρόνο ανόδου σε $t_r = 0.8796\, \mathrm{s}$. Είμαστε ακόμα εκτός προδιαγραφών, συνεπώς για να μείωσουμε κι άλλο το χρόνο ανόδου, μειώνουμε τη σταθερά $\alpha$ σε 0.2167, και παρατηρούμε την απόκριση, όπως φαίνεται και στο σχήμα \ref{fig:flcpi_responses_c}. Ο χρόνος ανόδου μειώθηκε στο $t_r = 0.41291\, \mathrm{s}$, αλλά πλέον έχουμε τεράστιες υπερυψώσεις. Για να τις αντισταθμίσουμε λοιπόν επιλέγουμε να αυξήσουμε το κέρδος $K_e$ από 1 σε 3, βελτιώνοντας έτσι την απόκριση του ελεγκτή, όπως άλλωστε φαίνεται και στο σχήμα \ref{fig:flcpi_responses_d}. Μάλιστα, πλέον είμαστε εντός των ζητούμενων προδιαγραφών, με χρόνο ανόδου $t_r = 0.56827\, \mathrm{s}$ και ποσοστό υπερύψωσης 3.4\%.\\
+	
+	Θεωρούμε την είσοδο στο ασαφές σύστημα συμπερασμού $E$ is NM AND $\dot{E}$ is ZR, η οποία μπορεί να μεταφραστεί ως το δισδιάστατο singleton $(-0.5,\ 0)$. Συμβουλευόμενοι του πίνακα \ref{tab:fuzzy_rulebase}, παρατηρούμε ότι το συμπέρασμα του συστήματος θα είναι $\dot{U}$ is NM. Να σημειωθεί ότι στην προκειμένη περίπτωση, η κάθε είσοδος ανήκει μονάχα σε ένα σύνολο και μάλιστα με μοναδιαία συμμετοχή, οπότε θα διεγερθεί μονάχα ένας κανόνας, ο οποίος θα έχει $\text{DOF} = 1$. Συνεπώς, δίνοντας το συμπέρασμα του FIS στον COS defuzzifier, παίρνουμε έξοδο $\dot{U} = -0.5$. Αυτό θα μπορούσε να ερμηνευτεί ποιοτικά ως εξής: δεδομένου ότι το σφάλμα $e = r - y$ είναι NM και το $\Delta e \approx 0$ σημαίνει οτί η απόκριση του συστήματος πάει να σταθεροποιηθεί με σφάλμα μόνιμης θέσης. Το σήμα $y$ είναι μεγαλύτερο από το σήμα αναφοράς $r$, οπότε ο ελεγκτής θα μειώσει το σήμα ελέγχου $u$  κατά ποσοστό ανάλογα με το σφάλμα $e$. Στο σχήμα \ref{fig:rule_firings} φαίνονται οι χώροι των μεταβλητών εισόδου και εξόδου καθώς και η συμμετοχή της singleton εισόδου $(-0.5,\ 0)$, καθώς και του συμπεράσματος, στα ασαφή σύνολα των μεταβλητών αυτών.	\\
+	
+	\begin{figure}[]
+	 	\setlength\figureheight{2.3cm}
+	 	\setlength\figurewidth{0.25\textwidth}
+		\centering
+		\begin{subfigure}[t]{0.32\textwidth}
+			\vspace{0pt}
+			\includegraphics{figure-8}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.32\textwidth}
+			\vspace{0pt}
+			\includegraphics{figure-9}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.32\textwidth}
+			\vspace{0pt}
+			\includegraphics{figure-10}
+		\end{subfigure}
+		\caption{Διέγερση εξόδου για είσοδο $E$ is NM και $\dot{E}$ is ZR}
+		\label{fig:rule_firings}
+	\end{figure}
+
+	Στο σχήμα \ref{fig:surf_plots} έχουμε την τρισδιάστατη επιφάνεια που δημιουργείται από την έξοδο του αποσαφοποιητή για όλες τις singleton εισόδους στο χώρο $[-1, 1]^2$. Παρατηρούμε ότι η μορφή των ισοδυναμικών αντιστοιχεί με τη μορφή της βάσης κανόνων όπως φαίνεται στον πίνακα \ref{tab:fuzzy_rulebase}. Οι ισοδυναμικές επιφάνειες διαχωρίζονται από γραμμές που αντιστοιχούν στις διαγώνιους του πίνακα όπου το συμπέρασμα παραμένει το ίδιο, παρ'όλη τη μη-γραμμική φύση του ελεγκτή. Επίσης παρατηρούμε ότι κάτω αριστερά και πάνω δέξια δημιουργούνται τριγωνικές ισοδυναμικές επιφάνειες που αντιστοιχούν στης περιοχές όπου το συμπέρασμα της βάσης υπόκειτα κορεσμό όντας στις ελάχιστες ή μέγιστες περιοχές αντίστοιχα. 
+
+	\begin{figure}[h]
+	 	\setlength\figureheight{5.3cm}
+		\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+			\includegraphics{figure-11}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.49\textwidth}
+			\includegraphics{figure-12}
+		\end{subfigure}
+		\caption{Καμπύλες σφάλματος των διαφορετικών αλγορίθμων}
+		\label{fig:surf_plots}
+	\end{figure}
+
+	\section{Σενάριο 2}
+	Για τις εισόδους αναφοράς $r$ που φαίνονται στο σχήμα \ref{fig:response_plots_2}, συγκρίνουμε τις αποκρίσεις του γραμμικού PI ελεγκτή με του ασαφούς. Κανονικά, το σύστημά μας με τη χρήση του PI ελεγκτή μετατρέπεται σε σύστημα τύπου 1, καθώς πλέον περιέχει έναν ολοκληρωτή. Αυτό σημαίνει ότι στην μόνιμη κατάσταση δε θα έχουμε σφάλμα θέσης, παρά μονάχα σφάλμα ταχύτητας. Για βηματικές εισόδους το σύστημα μάς θα συγκλίνει πάντα στην είσοδο αναφοράς είτε έχουμε γραμμικό είτε ασαφή ελεγκτή - η μόνη διαφορά θα είναι το θέμα της ταχύτητας σύγκλισης καθώς και των χαρακτηριστικών απόσβεσης. Όταν όμως έχουμε είσοδο ράμπα, αναμένουμε να έχουμε σφάλμα ταχύτητας, πράγμα το οποίο συμβαίνει στην περίπτωση του γραμμικού PI, όπως άλλωστε φαίνεται και στο σχήμα \ref{fig:response_plots_2}. Βέβαια, παρατηρεί κανείς ότι ο ασαφής PI παρουσιάζει σχεδόν μηδενικό σφάλμα ταχύτητας, και ακολουθεί το σήμα αναφοράς σχεδόν άριστα. Να τονιστεί σε αυτό το σημείο, ότι το σφάλμα ταχύτητας δεν είναι απολύτως μηδενικό, αλλά αρκετά χαμηλής τάξης ώστε πρακτικά να θεωρείται μηδέν, ειδικά σε σύγκριση με το σφάλμα ταχύτητας που εμφανίζει ο γραμμικός ελεγκτής και την τάξη μεγέθους της εισόδου.
+
+	\begin{figure}[]
+		\setlength\figureheight{2.67cm}
+		\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+			\includegraphics{figure-13}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.49\textwidth}
+			\includegraphics{figure-14}
+		\end{subfigure}
+		\caption{Αποκρίσεις συστήματος σε διαφορετικές εισόδους αναφοράς}
+		\label{fig:response_plots_2}
+	\end{figure}
+\end{document}
